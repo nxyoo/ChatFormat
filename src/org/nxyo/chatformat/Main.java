@@ -8,25 +8,43 @@ package org.nxyo.chatformat;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
+import java.io.IOException;
+
 public class Main extends JavaPlugin implements Listener {
 
+    File newConfig;
+    FileConfiguration newConfigz;
     @Override
     public void onEnable(){
         getServer().getConsoleSender().sendMessage(ChatColor.RED + "ChatFormatter by nxyo");
         getServer().getPluginManager().registerEvents(this, this);
+        newConfig = new File(getDataFolder(), "config.yml");
+        newConfigz = YamlConfiguration.loadConfiguration(newConfig);
+        saveNewConfig();
     }
 
-// Si votre serveur utilise un system de permission (comme LuckPerms) avec placeholderapi, vous pouvez utiliser cela :
+    public void saveNewConfig(){
+        try{
+            newConfigz.save(newConfig);
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
     @EventHandler
     public void chatFormat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
-        event.setFormat(PlaceholderAPI.setPlaceholders(player,"%luckperms_prefix% %player_name% §f> " + event.getMessage()));
+        event.setFormat(PlaceholderAPI.setPlaceholders(player,getConfig().getString("prefix") + " " + player.getDisplayName() + " " + getConfig().getString("suffix") + " " + getConfig().getString("separator") + " " + event.getMessage()));
     }
 
 // Si vous utiliser un system de grade avec permission normal (non luckperms, ect..) vous pouvez utiliser cela :
