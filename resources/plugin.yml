@@ -1,0 +1,4 @@
+name: ChatFormat
+main: org.nxyo.chatformat.Main
+version: 1.0
+author: nxyo
