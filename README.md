@@ -8,7 +8,7 @@
 ChatFormat est un simple plugin spigot pour customiser son chat minecraft
 Pour l'instant il faut editer la class main.java pour customiser le formattage du chat, mais je ferais une v2 avec un fichier config.
 <code>
-  EDIT: J'ai fais une 2ème version, avec un fichier config, mais il faut obligatoirement PlaceHolderApi..
+  EDIT: J'ai fais une 2ème version avec un fichier config.yml !
 </code>
 
 ## 🤯Comment l'utiliser?
